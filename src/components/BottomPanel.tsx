@@ -50,14 +50,14 @@ export const BottomPanel = ({ currentMarket, currentPrice }: BottomPanelProps) =
   ];
 
   return (
-    <div className="flex-shrink-0 h-48 flex flex-col bg-trading-bg">
+    <div className="flex-shrink-0 h-36 md:h-48 flex flex-col bg-trading-bg">
       {/* Tabs */}
-      <div className="flex items-center border-b border-trading-border text-sm">
+      <div className="flex items-center border-b border-trading-border text-xs md:text-sm overflow-x-auto">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 border-b-2 transition-colors ${
+            className={`px-2 md:px-4 py-2 border-b-2 transition-colors flex-shrink-0 mobile-touch ${
               activeTab === tab.id
                 ? 'text-foreground border-success'
                 : 'text-muted-foreground hover:text-foreground border-transparent'
@@ -69,26 +69,26 @@ export const BottomPanel = ({ currentMarket, currentPrice }: BottomPanelProps) =
       </div>
 
       {/* Tab Content */}
-      <div className="flex-grow overflow-y-auto custom-scrollbar p-2">
+      <div className="flex-grow overflow-y-auto custom-scrollbar p-1 md:p-2">
         {activeTab === 'market-trades' && (
-          <table className="w-full">
+          <table className="w-full mobile-table">
             <thead className="text-muted-foreground">
               <tr>
-                <th className="text-left font-normal pb-2 text-xs">Price</th>
-                <th className="text-right font-normal pb-2 text-xs">Amount</th>
-                <th className="text-right font-normal pb-2 text-xs">Total</th>
-                <th className="text-right font-normal pb-2 text-xs">Time</th>
+                <th className="text-left font-normal pb-1 md:pb-2 text-xs">Price</th>
+                <th className="text-right font-normal pb-1 md:pb-2 text-xs">Amount</th>
+                <th className="text-right font-normal pb-1 md:pb-2 text-xs">Total</th>
+                <th className="text-right font-normal pb-1 md:pb-2 text-xs">Time</th>
               </tr>
             </thead>
             <tbody>
               {marketTrades.map((trade, index) => (
                 <tr key={index} className="hover:bg-trading-hover cursor-pointer text-xs">
-                  <td className={trade.isBuy ? 'text-success' : 'text-danger'}>
+                  <td className={`py-1 ${trade.isBuy ? 'text-success' : 'text-danger'}`}>
                     {trade.price.toFixed(2)}
                   </td>
-                  <td className="text-right text-foreground">{trade.amount.toFixed(4)}</td>
-                  <td className="text-right text-muted-foreground">{trade.total.toFixed(4)}</td>
-                  <td className="text-right text-muted-foreground">{trade.time}</td>
+                  <td className="text-right text-foreground py-1">{trade.amount.toFixed(4)}</td>
+                  <td className="text-right text-muted-foreground py-1">{trade.total.toFixed(4)}</td>
+                  <td className="text-right text-muted-foreground py-1 hidden sm:table-cell">{trade.time}</td>
                 </tr>
               ))}
             </tbody>
@@ -96,29 +96,29 @@ export const BottomPanel = ({ currentMarket, currentPrice }: BottomPanelProps) =
         )}
 
         {activeTab === 'open-orders' && (
-          <table className="w-full">
+          <table className="w-full mobile-table">
             <thead className="text-muted-foreground">
               <tr>
-                <th className="text-left font-normal pb-2 text-xs">Pair</th>
-                <th className="text-left font-normal pb-2 text-xs">Type</th>
-                <th className="text-left font-normal pb-2 text-xs">Price</th>
-                <th className="text-left font-normal pb-2 text-xs">Amount</th>
-                <th className="text-left font-normal pb-2 text-xs">Total</th>
-                <th className="text-right font-normal pb-2 text-xs">Action</th>
+                <th className="text-left font-normal pb-1 md:pb-2 text-xs">Pair</th>
+                <th className="text-left font-normal pb-1 md:pb-2 text-xs">Type</th>
+                <th className="text-left font-normal pb-1 md:pb-2 text-xs hidden sm:table-cell">Price</th>
+                <th className="text-left font-normal pb-1 md:pb-2 text-xs hidden md:table-cell">Amount</th>
+                <th className="text-left font-normal pb-1 md:pb-2 text-xs">Total</th>
+                <th className="text-right font-normal pb-1 md:pb-2 text-xs">Action</th>
               </tr>
             </thead>
             <tbody>
               {mockOpenOrders.map((order, index) => (
                 <tr key={index} className="hover:bg-trading-hover cursor-pointer text-xs">
-                  <td>{order.pair}</td>
-                  <td className={order.type.includes('Buy') ? 'text-success' : 'text-danger'}>
+                  <td className="py-1">{order.pair}</td>
+                  <td className={`py-1 ${order.type.includes('Buy') ? 'text-success' : 'text-danger'}`}>
                     {order.type}
                   </td>
-                  <td>{order.price}</td>
-                  <td>{order.amount}</td>
-                  <td>{order.total}</td>
-                  <td className="text-right">
-                    <button className="text-danger hover:underline">{order.action}</button>
+                  <td className="py-1 hidden sm:table-cell">{order.price}</td>
+                  <td className="py-1 hidden md:table-cell">{order.amount}</td>
+                  <td className="py-1">{order.total}</td>
+                  <td className="text-right py-1">
+                    <button className="text-danger hover:underline mobile-touch">{order.action}</button>
                   </td>
                 </tr>
               ))}

@@ -78,7 +78,7 @@ const Index = () => {
       
       <div 
         className={`flex flex-col h-screen transition-smooth ${
-          isHeaderVisible ? 'pt-14' : 'pt-0'
+          isHeaderVisible ? 'pt-12 md:pt-14' : 'pt-0'
         }`}
       >
         <PriceTicker
@@ -87,14 +87,16 @@ const Index = () => {
           onMarketSelect={() => setIsMarketModalOpen(true)}
         />
 
-        <main className="flex-grow flex flex-col lg:flex-row overflow-hidden bg-trading-bg">
-          <div className="flex-grow flex flex-col w-full lg:w-3/5">
+        <main className="flex-grow flex flex-col xl:flex-row overflow-hidden bg-trading-bg">
+          <div className="flex-grow flex flex-col w-full xl:w-3/5 min-h-0">
             <TradingChart />
             <BottomPanel currentMarket={currentMarket} currentPrice={currentPrice} />
           </div>
 
-          <OrderBook currentMarket={currentMarket} currentPrice={currentPrice} />
-          <TradingPanel currentMarket={currentMarket} currentPrice={currentPrice} />
+          <div className="flex flex-col lg:flex-row xl:flex-col xl:w-2/5">
+            <OrderBook currentMarket={currentMarket} currentPrice={currentPrice} />
+            <TradingPanel currentMarket={currentMarket} currentPrice={currentPrice} />
+          </div>
         </main>
 
         <footer className="flex-shrink-0 bg-trading-bg border-t border-trading-border px-3 py-2 flex items-center justify-between text-xs text-muted-foreground">

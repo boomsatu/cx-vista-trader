@@ -51,18 +51,18 @@ export const OrderBook = ({ currentMarket, currentPrice }: OrderBookProps) => {
   const maxBidTotal = Math.max(...bids.map(o => o.total));
 
   return (
-    <div className="w-full lg:w-1/5 flex flex-col border-r border-trading-border pb-3">
+    <div className="w-full lg:w-1/5 flex flex-col border-r border-trading-border pb-3 mobile-orderbook">
       <div className="p-2 flex items-center justify-between border-b border-trading-border flex-shrink-0">
-        <h2 className="text-sm font-semibold text-foreground">Order Book</h2>
+        <h2 className="text-xs md:text-sm font-semibold text-foreground">Order Book</h2>
         <div className="flex space-x-1">
-          <div className="w-4 h-4 bg-muted rounded-sm"></div>
-          <div className="w-4 h-4 bg-muted rounded-sm"></div>
-          <div className="w-4 h-4 bg-muted rounded-sm"></div>
+          <div className="w-3 h-3 md:w-4 md:h-4 bg-muted rounded-sm"></div>
+          <div className="w-3 h-3 md:w-4 md:h-4 bg-muted rounded-sm"></div>
+          <div className="w-3 h-3 md:w-4 md:h-4 bg-muted rounded-sm"></div>
         </div>
       </div>
       
       <div className="flex-grow overflow-hidden flex flex-col">
-        <div className="grid grid-cols-3 gap-4 p-2 text-muted-foreground text-xs">
+        <div className="grid grid-cols-3 gap-2 md:gap-4 p-2 text-muted-foreground text-xs">
           <div>Price({currentMarket.quote})</div>
           <div className="text-right">Amount({currentMarket.base})</div>
           <div className="text-right">Total({currentMarket.quote})</div>
@@ -72,17 +72,17 @@ export const OrderBook = ({ currentMarket, currentPrice }: OrderBookProps) => {
           {asks.map((ask, index) => (
             <div
               key={`ask-${index}`}
-              className="grid grid-cols-3 gap-4 p-1.5 text-xs relative ask-progress cursor-pointer hover:bg-trading-hover"
+              className="grid grid-cols-3 gap-2 md:gap-4 p-1 md:p-1.5 text-xs relative ask-progress cursor-pointer hover:bg-trading-hover"
               style={{ '--progress': `${(ask.total / maxAskTotal) * 100}%` } as React.CSSProperties}
             >
-              <span className="text-danger">{ask.price.toFixed(2)}</span>
-              <span className="text-right text-foreground">{ask.amount.toFixed(5)}</span>
-              <span className="text-right text-muted-foreground">{ask.total.toFixed(2)}</span>
+              <span className="text-danger truncate">{ask.price.toFixed(2)}</span>
+              <span className="text-right text-foreground truncate">{ask.amount.toFixed(4)}</span>
+              <span className="text-right text-muted-foreground truncate">{ask.total.toFixed(2)}</span>
             </div>
           ))}
         </div>
         
-        <div className="py-2 text-lg text-success font-semibold text-center border-t border-b border-trading-border">
+        <div className="py-1.5 md:py-2 text-sm md:text-lg text-success font-semibold text-center border-t border-b border-trading-border">
           {currentPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </div>
         
@@ -90,12 +90,12 @@ export const OrderBook = ({ currentMarket, currentPrice }: OrderBookProps) => {
           {bids.map((bid, index) => (
             <div
               key={`bid-${index}`}
-              className="grid grid-cols-3 gap-4 p-1.5 text-xs relative bid-progress cursor-pointer hover:bg-trading-hover"
+              className="grid grid-cols-3 gap-2 md:gap-4 p-1 md:p-1.5 text-xs relative bid-progress cursor-pointer hover:bg-trading-hover"
               style={{ '--progress': `${(bid.total / maxBidTotal) * 100}%` } as React.CSSProperties}
             >
-              <span className="text-success">{bid.price.toFixed(2)}</span>
-              <span className="text-right text-foreground">{bid.amount.toFixed(5)}</span>
-              <span className="text-right text-muted-foreground">{bid.total.toFixed(2)}</span>
+              <span className="text-success truncate">{bid.price.toFixed(2)}</span>
+              <span className="text-right text-foreground truncate">{bid.amount.toFixed(4)}</span>
+              <span className="text-right text-muted-foreground truncate">{bid.total.toFixed(2)}</span>
             </div>
           ))}
         </div>

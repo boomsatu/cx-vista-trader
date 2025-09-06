@@ -163,4 +163,46 @@
   .transition-smooth {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    body {
+      font-size: 11px;
+    }
+    
+    /* Mobile touch targets */
+    .mobile-touch {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Mobile table spacing */
+    .mobile-table td,
+    .mobile-table th {
+      padding: 8px 4px;
+    }
+    
+    /* Mobile order book */
+    .mobile-orderbook .grid {
+      gap: 2px;
+    }
+    
+    /* Mobile trading panel */
+    .mobile-trading-panel input {
+      padding: 12px 8px;
+      font-size: 14px;
+    }
+    
+    .mobile-trading-panel button {
+      padding: 12px;
+      font-size: 14px;
+    }
+  }
+
+  /* Tablet optimizations */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .tablet-layout {
+      flex-direction: column;
+    }
+  }
 }

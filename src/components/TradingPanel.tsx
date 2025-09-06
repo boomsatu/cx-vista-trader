@@ -22,12 +22,12 @@ export const TradingPanel = ({ currentMarket, currentPrice }: TradingPanelProps)
   };
 
   return (
-    <div className="w-full lg:w-1/5 flex flex-col p-3 bg-trading-bg">
+    <div className="w-full lg:w-1/5 flex flex-col p-2 md:p-3 bg-trading-bg mobile-trading-panel">
       {/* Buy/Sell Toggle */}
-      <div className="flex border border-trading-border mb-4 rounded">
+      <div className="flex border border-trading-border mb-3 md:mb-4 rounded">
         <button
           onClick={() => setIsBuyMode(true)}
-          className={`flex-1 py-2 text-center text-sm font-medium rounded-l transition-colors ${
+          className={`flex-1 py-2 md:py-2 text-center text-xs md:text-sm font-medium rounded-l transition-colors mobile-touch ${
             isBuyMode
               ? 'text-success bg-success-light'
               : 'text-muted-foreground hover:bg-trading-hover'
@@ -37,7 +37,7 @@ export const TradingPanel = ({ currentMarket, currentPrice }: TradingPanelProps)
         </button>
         <button
           onClick={() => setIsBuyMode(false)}
-          className={`flex-1 py-2 text-center text-sm font-medium rounded-r transition-colors ${
+          className={`flex-1 py-2 md:py-2 text-center text-xs md:text-sm font-medium rounded-r transition-colors mobile-touch ${
             !isBuyMode
               ? 'text-danger bg-danger-light'
               : 'text-muted-foreground hover:bg-trading-hover'
@@ -48,10 +48,10 @@ export const TradingPanel = ({ currentMarket, currentPrice }: TradingPanelProps)
       </div>
 
       {/* Order Type */}
-      <div className="flex space-x-4 mb-4 text-sm">
+      <div className="flex space-x-3 md:space-x-4 mb-3 md:mb-4 text-xs md:text-sm">
         <button
           onClick={() => setOrderType('limit')}
-          className={`${
+          className={`mobile-touch ${
             orderType === 'limit' ? 'text-foreground font-medium' : 'text-muted-foreground'
           }`}
         >
@@ -59,7 +59,7 @@ export const TradingPanel = ({ currentMarket, currentPrice }: TradingPanelProps)
         </button>
         <button
           onClick={() => setOrderType('market')}
-          className={`${
+          className={`mobile-touch ${
             orderType === 'market' ? 'text-foreground font-medium' : 'text-muted-foreground'
           }`}
         >
@@ -67,7 +67,7 @@ export const TradingPanel = ({ currentMarket, currentPrice }: TradingPanelProps)
         </button>
         <button
           onClick={() => setOrderType('tpsl')}
-          className={`${
+          className={`mobile-touch ${
             orderType === 'tpsl' ? 'text-foreground font-medium' : 'text-muted-foreground'
           }`}
         >
@@ -76,17 +76,17 @@ export const TradingPanel = ({ currentMarket, currentPrice }: TradingPanelProps)
       </div>
 
       {/* Order Form */}
-      <div className="space-y-3">
+      <div className="space-y-2 md:space-y-3">
         {/* Price Input */}
         <div className="relative">
           <input
             type="text"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            className="w-full bg-input border border-trading-border p-2 text-sm focus:outline-none focus:ring-1 focus:ring-success rounded"
+            className="w-full bg-input border border-trading-border p-2 md:p-2 text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-success rounded"
             disabled={orderType === 'market'}
           />
-          <span className="absolute right-3 top-2.5 text-muted-foreground text-xs">
+          <span className="absolute right-2 md:right-3 top-2 md:top-2.5 text-muted-foreground text-xs">
             {currentMarket.quote}
           </span>
         </div>
@@ -98,15 +98,15 @@ export const TradingPanel = ({ currentMarket, currentPrice }: TradingPanelProps)
             placeholder="Amount"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full bg-input border border-trading-border p-2 text-sm focus:outline-none focus:ring-1 focus:ring-success rounded"
+            className="w-full bg-input border border-trading-border p-2 md:p-2 text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-success rounded"
           />
-          <span className="absolute right-3 top-2.5 text-muted-foreground text-xs">
+          <span className="absolute right-2 md:right-3 top-2 md:top-2.5 text-muted-foreground text-xs">
             {currentMarket.base}
           </span>
         </div>
 
         {/* Percentage Slider */}
-        <div className="space-y-2">
+        <div className="space-y-1 md:space-y-2">
           <input
             type="range"
             className="w-full h-1 bg-muted rounded-lg appearance-none cursor-pointer"
@@ -120,7 +120,7 @@ export const TradingPanel = ({ currentMarket, currentPrice }: TradingPanelProps)
               <button
                 key={percent}
                 onClick={() => handlePercentageClick(percent)}
-                className="hover:text-foreground"
+                className="hover:text-foreground mobile-touch text-xs"
               >
                 {percent}%
               </button>
@@ -135,16 +135,16 @@ export const TradingPanel = ({ currentMarket, currentPrice }: TradingPanelProps)
             placeholder="Total"
             value={total}
             onChange={(e) => setTotal(e.target.value)}
-            className="w-full bg-input border border-trading-border p-2 text-sm focus:outline-none focus:ring-1 focus:ring-success rounded"
+            className="w-full bg-input border border-trading-border p-2 md:p-2 text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-success rounded"
           />
-          <span className="absolute right-3 top-2.5 text-muted-foreground text-xs">
+          <span className="absolute right-2 md:right-3 top-2 md:top-2.5 text-muted-foreground text-xs">
             {currentMarket.quote}
           </span>
         </div>
 
         {/* Action Button */}
         <button
-          className={`w-full font-bold py-2.5 text-sm rounded transition-colors ${
+          className={`w-full font-bold py-3 md:py-2.5 text-sm md:text-sm rounded transition-colors mobile-touch ${
             isBuyMode
               ? 'bg-success hover:bg-success/90 text-success-foreground'
               : 'bg-danger hover:bg-danger/90 text-danger-foreground'
@@ -155,7 +155,7 @@ export const TradingPanel = ({ currentMarket, currentPrice }: TradingPanelProps)
       </div>
 
       {/* Balance Info */}
-      <div className="mt-4 pt-4 border-t border-trading-border space-y-2 text-xs">
+      <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-trading-border space-y-1 md:space-y-2 text-xs">
         <div className="flex justify-between">
           <span className="text-muted-foreground">{currentMarket.quote} Balance</span>
           <span className="text-foreground">1,250.75</span>
